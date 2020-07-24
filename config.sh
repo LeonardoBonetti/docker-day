@@ -2,7 +2,7 @@
 
 export WEB_DOMAIN='leobonetti.com'
 export NODEJS_MONGO_CONN_STRING=''
-export NODEJS_PORT='80'
+export NODEJS_PORT='8080'
 export PROJECT_PATH='/home/bianca_du_raposo/docker-day'
 export DOLLAR='$'
 
