@@ -1,0 +1,17 @@
+server {    
+    listen 80;
+    listen [::]:80;
+
+    root /var/www/src;
+    server_name ${WEB_DOMAIN} www.${WEB_DOMAIN};    
+
+    location / {
+        proxy_pass http://nodejs:8080;
+    }
+
+    location ~ /.well-known/acme-challenge {
+        allow all;
+        root /var/www/src;
+    }
+}
+

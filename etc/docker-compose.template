@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  nodejs:
+    build:
+      context: ./backend
+      dockerfile: dockerfile
+    image: nodejs
+    container_name: nodejs
+    restart: unless-stopped
+    networks:
+      - app-network
+  webserver:
+    image: nginx
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - web-root:/var/www/src
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - nodejs
+    networks:
+      - app-network 
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/src
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/src --email ${SSL_EMAIL} --agree-tos --no-eff-email --force-renewal -d ${WEB_DOMAIN} -d www.${WEB_DOMAIN}
+  front-app:
+      container_name: front-app
+      build:
+        context: ./front
+        dockerfile: dockerfile
+      ports:
+        - "80:80"
+volumes:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: ${PROJECT_PATH}
+      o: bind
+
+networks:
+  app-network:
+    driver: bridge
