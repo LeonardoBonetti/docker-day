@@ -23,16 +23,6 @@ services:
       - nodejs
     networks:
       - app-network 
-  certbot:
-    image: certbot/certbot
-    container_name: certbot
-    volumes:
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
-      - web-root:/var/www/src
-    depends_on:
-      - webserver
-    command: certonly --webroot --webroot-path=/var/www/src --email ${SSL_EMAIL} --agree-tos --no-eff-email --force-renewal -d ${WEB_DOMAIN} -d www.${WEB_DOMAIN}
   front-app:
       container_name: front-app
       build:
