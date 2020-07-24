@@ -15,7 +15,7 @@ services:
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "8080:8081"
+      - "8080:80"
     volumes:
       - web-root:/var/www/src
       - ./nginx-conf:/etc/nginx/conf.d
@@ -40,8 +40,6 @@ services:
       build:
         context: ./front
         dockerfile: dockerfile
-      volumes:
-        - ./nginx-conf:/etc/nginx/conf.d
       ports:
         - "80:80"
 volumes:
