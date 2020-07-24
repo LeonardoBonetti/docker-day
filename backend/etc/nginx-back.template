@@ -1,6 +1,6 @@
 server {    
-    listen 80;
-    listen [::]:80;
+    listen 8080;
+    listen [::]:8080;
 
     root /var/www/src;
     server_name ${WEB_DOMAIN} www.${WEB_DOMAIN};    
