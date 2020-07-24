@@ -15,7 +15,7 @@ services:
     container_name: webserver
     restart: unless-stopped
     ports:
-      - "8080:80"
+      - "8080:8081"
     volumes:
       - web-root:/var/www/src
       - ./nginx-conf:/etc/nginx/conf.d
@@ -43,7 +43,7 @@ services:
       volumes:
         - ./nginx-conf:/etc/nginx/conf.d
       ports:
-        - "80:80"
+        - "80:8082"
 volumes:
   certbot-etc:
   certbot-var:
