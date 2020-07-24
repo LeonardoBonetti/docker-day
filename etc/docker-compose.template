@@ -18,9 +18,7 @@ services:
       - "8080:80"
     volumes:
       - web-root:/var/www/src
-      - ./nginx-conf:/etc/nginx/conf.d
-      - certbot-etc:/etc/letsencrypt
-      - certbot-var:/var/lib/letsencrypt
+      - ./backend/nginx-conf:/etc/nginx/conf.d
     depends_on:
       - nodejs
     networks:
@@ -43,13 +41,11 @@ services:
       ports:
         - "80:80"
 volumes:
-  certbot-etc:
-  certbot-var:
   web-root:
     driver: local
     driver_opts:
       type: none
-      device: ${PROJECT_PATH}
+      device: ${PROJECT_PATH}/backend
       o: bind
 
 networks:
