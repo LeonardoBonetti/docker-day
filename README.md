@@ -39,5 +39,4 @@ A configuração do deploy se da na edição e execução do arquovo `config.sh`
 > docker run -p 80:80 -d front-end
 ```
 
-
-# Preparação
+Pdf de auxilio: https://drive.google.com/file/d/1TpeGVgUo4Nl6aw_CYqqC54L6N8KnG7yw/view?usp=sharing
